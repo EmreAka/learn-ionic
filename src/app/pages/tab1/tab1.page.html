@@ -1,22 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Cars
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
+
   <ion-list *ngIf="paginatedCarResult">
+    <ion-item *ngFor="let car of paginatedCarResult.items">
+      <ion-label>
+        <h1>
+          {{car.brandName}}
+        </h1>
+        <p>
+          {{car.modelName}} - {{car.colorName}} - {{car.modelYear}}
+        </p>
+      </ion-label>
+      <ion-label slot="end">
+        Details
+      </ion-label>
+    </ion-item>
+
     <ion-card *ngFor="let car of paginatedCarResult.items">
       <ion-card-header>
         <ion-card-title>{{car.brandName}}</ion-card-title>
         <ion-card-subtitle>{{car.modelName}}</ion-card-subtitle>
       </ion-card-header>
-    
+
       <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
+        {{car.modelYear}}
       </ion-card-content>
     </ion-card>
   </ion-list>

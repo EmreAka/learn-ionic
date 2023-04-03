@@ -17,6 +17,10 @@ export class Tab1Page implements OnInit{
   paginatedCarResult: PaginatedResult<Car>
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
+    this.getCars()
+  }
+
+  getCars(){
     this.httpClient.get<PaginatedResult<Car>>(`${environment.apiUrl}Cars?Page=0&PageSize=10`).subscribe({
       next: (value) => {
         this.paginatedCarResult = value;
@@ -24,4 +28,15 @@ export class Tab1Page implements OnInit{
       }
     });
   }
+
+  handleChange(event: any){
+    const search = event.detail["value"];
+    if (search)
+      this.paginatedCarResult.items = this.paginatedCarResult.items.
+        filter(car => car.brandName.toLowerCase().startsWith(search.toLowerCase()))
+    else{
+      this.getCars();
+    }
+  }
+
 }
