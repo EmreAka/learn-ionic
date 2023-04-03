@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="py-auto">
+  <h1 class="text-center font-bold mt-10">Rent A Car</h1>
+  <ion-list class="mt-10" [formGroup]="loginForm">
+    <ion-item>
+      <ion-input label="Email" labelPlacement="stacked" placeholder="Enter email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Password" labelPlacement="stacked" placeholder="Enter password" type="password" formControlName="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="login()">Login</ion-button>
+</ion-content>
