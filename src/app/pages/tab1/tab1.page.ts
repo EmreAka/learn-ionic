@@ -5,13 +5,14 @@ import { ListResult } from 'src/app/models/ListResult';
 import { Car } from 'src/app/models/car';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
+import {TurkishCurrencyPipe} from "../../pipes/turkish-currency.pipe";
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonicModule, HttpClientModule, CommonModule],
+  imports: [IonicModule, HttpClientModule, CommonModule, TurkishCurrencyPipe],
 })
 export class Tab1Page implements OnInit{
   paginatedCarResult: ListResult<Car>

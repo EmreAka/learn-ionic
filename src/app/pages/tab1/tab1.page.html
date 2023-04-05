@@ -11,13 +11,14 @@
 
   <ion-list *ngIf="paginatedCarResult">
     <ion-card *ngFor="let car of paginatedCarResult.data">
+      <ion-img [src]="car.images[0]"/>
       <ion-card-header>
         <ion-card-title>{{car.brandName}}</ion-card-title>
-        <ion-card-subtitle>{{car.dailyPrice | currency}}</ion-card-subtitle>
+        <ion-card-subtitle>{{car.modelYear}}</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
-        {{car.modelYear}}
+        {{car.dailyPrice | turkishCurrency}}
       </ion-card-content>
     </ion-card>
   </ion-list>
