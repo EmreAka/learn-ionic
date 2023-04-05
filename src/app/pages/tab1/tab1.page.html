@@ -18,9 +18,19 @@
       </ion-card-header>
 
       <ion-card-content>
-        {{car.dailyPrice | turkishCurrency}}
+        <div class="flex items-center justify-between">
+          <div>
+            {{car.dailyPrice | turkishCurrency}}
+          </div>
+          <ion-icon name="heart-outline" class="text-4xl" (click)="favorite(car.id)"></ion-icon>
+        </div>
+
       </ion-card-content>
     </ion-card>
   </ion-list>
-
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

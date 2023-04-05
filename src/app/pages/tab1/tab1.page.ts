@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {AlertController, IonicModule} from '@ionic/angular';
 import {HttpClient, HttpClientModule} from '@angular/common/http'
 import { ListResult } from 'src/app/models/ListResult';
 import { Car } from 'src/app/models/car';
@@ -16,7 +16,7 @@ import {TurkishCurrencyPipe} from "../../pipes/turkish-currency.pipe";
 })
 export class Tab1Page implements OnInit{
   paginatedCarResult: ListResult<Car>
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private readonly alertController: AlertController) {}
   ngOnInit(): void {
     this.getCars()
   }
@@ -40,4 +40,16 @@ export class Tab1Page implements OnInit{
     // }
   }
 
+  favorite(id: number) {
+    this.httpClient.post<any>("http://localhost:56305/api/Favorites/addfavorite", {carId: id})
+      .subscribe({
+        next: (value) => {
+          this.alertController.create({
+            header: "Başarılı",
+            message: "Favorilere eklendi",
+            buttons: ["Tamam"]
+          }).then(alertController => alertController.present())
+        }
+      })
+  }
 }
