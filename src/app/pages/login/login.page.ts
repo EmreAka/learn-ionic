@@ -44,6 +44,8 @@ export class LoginPage implements OnInit {
     this.httpClient.post<any>("http://localhost:56305/api/Auth/login", this.loginForm.value).subscribe({
       next: (value) => {
         loading.remove()
+        console.log(value);
+        localStorage.setItem("token", value.data.token);
         this.router.navigateByUrl("")
       },
     })
