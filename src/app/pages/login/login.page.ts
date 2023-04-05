@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
     })
     await loading.present();
 
-    this.httpClient.post<any>(`${environment.apiUrl}Auth/Login`, this.loginForm.value).subscribe({
+    this.httpClient.post<any>("http://localhost:56305/api/Auth/login", this.loginForm.value).subscribe({
       next: (value) => {
         loading.remove()
         this.router.navigateByUrl("")

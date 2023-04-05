@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import {HttpClient, HttpClientModule} from '@angular/common/http'
-import { PaginatedResult } from 'src/app/models/paginatedResult';
+import { ListResult } from 'src/app/models/ListResult';
 import { Car } from 'src/app/models/car';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
@@ -14,29 +14,29 @@ import { CommonModule } from '@angular/common';
   imports: [IonicModule, HttpClientModule, CommonModule],
 })
 export class Tab1Page implements OnInit{
-  paginatedCarResult: PaginatedResult<Car>
+  paginatedCarResult: ListResult<Car>
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
     this.getCars()
   }
 
   getCars(){
-    this.httpClient.get<PaginatedResult<Car>>(`${environment.apiUrl}Cars?Page=0&PageSize=10`).subscribe({
+    this.httpClient.get<any>("http://localhost:56305/api/Cars/getcardetails").subscribe({
       next: (value) => {
-        this.paginatedCarResult = value;
         console.log(value)
+        this.paginatedCarResult = value;
       }
     });
   }
 
   handleChange(event: any){
     const search = event.detail["value"];
-    if (search)
-      this.paginatedCarResult.items = this.paginatedCarResult.items.
-        filter(car => car.brandName.toLowerCase().startsWith(search.toLowerCase()))
-    else{
-      this.getCars();
-    }
+    // if (search)
+    //   this.paginatedCarResult.items = this.paginatedCarResult.items.
+    //     filter(car => car.brandName.toLowerCase().startsWith(search.toLowerCase()))
+    // else{
+    //   this.getCars();
+    // }
   }
 
 }
